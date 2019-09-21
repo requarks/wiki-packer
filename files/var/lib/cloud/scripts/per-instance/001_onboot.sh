@@ -5,7 +5,6 @@
 # or other items that will be unique to each instance should be done in scripts here.
 
 openssl rand -base64 32 > /etc/wiki/.db-secret
-chmod 0400 /etc/wiki/.db-secret
 
 docker start db
 docker start wiki
