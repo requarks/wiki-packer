@@ -37,7 +37,7 @@
       "type": "shell",
       "scripts": [
         "scripts/10-install_docker.sh",
-        "scripts/20-run_containers.sh"
+        "scripts/80-firewall.sh"
       ]
     },
     {
