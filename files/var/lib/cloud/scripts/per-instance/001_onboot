@@ -10,3 +10,4 @@ openssl rand -base64 32 | docker secret create wiki-db-pwd
 docker run -d --name=db -e POSTGRES_DB=wiki -e POSTGRES_USER=wiki -e POSTGRES_PASSWORD_FILE=/run/secrets/wiki-db-pwd -v pgdata:/var/lib/postgresql/data --restart=unless-stopped -h db --network=wikinet postgres:11
 docker run -d --name=wiki -e DB_TYPE=postgres -e DB_HOST=db -e DB_PORT=5432 -e DB_PASS_FILE=/run/secrets/wiki-db-pwd -e DB_USER=wiki -e DB_NAME=wiki -e TRUST_PROXY=true -e VIRTUAL_HOST=wiki.local --restart=unless-stopped -h wiki --network=wikinet -p 80:3000 requarks/wiki:beta
 # docker run -d --name=nginx-proxy -p 80:80 -p 443:443 -e DEFAULT_HOST=wiki.local --network=wikinet -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy
+docker run -d --name=watchtower --network=wikinet -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --cleanup --schedule="0 0 4 * * *" wiki
