@@ -29,6 +29,8 @@
       "type": "shell",
       "inline": [
         "cloud-init status --wait",
+        "chmod +x /var/lib/cloud/scripts/per-instance/001_onboot.sh",
+        "chmod +x /etc/update-motd.d/99-one-click.sh",
         "apt -qqy update",
         "apt -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' full-upgrade"
       ]
