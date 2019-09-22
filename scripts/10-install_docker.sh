@@ -8,9 +8,9 @@ apt -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confol
 
 mkdir -p /etc/wiki
 
-docker network create -d bridge wikinet
+docker network create wikinet
 docker volume create pgdata
 docker create --name=db -e POSTGRES_DB=wiki -e POSTGRES_USER=wiki -e POSTGRES_PASSWORD_FILE=/etc/wiki/.db-secret -v /etc/wiki/.db-secret:/etc/wiki/.db-secret:ro -v pgdata:/var/lib/postgresql/data --restart=unless-stopped -h db --network=wikinet postgres:11
-docker create --name=wiki -e DB_TYPE=postgres -e DB_HOST=db -e DB_PORT=5432 -e DB_PASS_FILE=/etc/wiki/.db-secret -v /etc/wiki/.db-secret:/etc/wiki/.db-secret:ro -e DB_USER=wiki -e DB_NAME=wiki -e TRUST_PROXY=true -e VIRTUAL_HOST=wiki.local --restart=unless-stopped -h wiki --network=wikinet -p 80:3000 requarks/wiki:dev
+docker create --name=wiki -e DB_TYPE=postgres -e DB_HOST=db -e DB_PORT=5432 -e DB_PASS_FILE=/etc/wiki/.db-secret -v /etc/wiki/.db-secret:/etc/wiki/.db-secret:ro -v /var/run/docker.sock:/var/run/docker.sock -e DB_USER=wiki -e DB_NAME=wiki -e TRUST_PROXY=true -e VIRTUAL_HOST=wiki.local --restart=unless-stopped -h wiki --network=wikinet -p 80:3000 requarks/wiki:dev
 # docker create --name=nginx-proxy -p 80:80 -p 443:443 -e DEFAULT_HOST=wiki.local --network=wikinet -v /var/run/docker.sock:/tmp/docker.sock:ro --restart=unless-stopped jwilder/nginx-proxy
-docker create --name=watchtower --network=wikinet -v /var/run/docker.sock:/var/run/docker.sock --restart=unless-stopped containrrr/watchtower --cleanup --schedule="0 2 * * 6" wiki
+# docker create --name=watchtower --network=wikinet -v /var/run/docker.sock:/var/run/docker.sock --restart=unless-stopped containrrr/watchtower --cleanup --schedule="0 2 * * 6" wiki
