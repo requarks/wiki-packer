@@ -8,5 +8,6 @@ openssl rand -base64 32 > /etc/wiki/.db-secret
 
 docker start db
 docker start wiki
+docker start wiki-update-companion
 # docker start nginx-proxy
-docker start watchtower
+# docker start watchtower
