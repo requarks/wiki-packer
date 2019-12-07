@@ -24,13 +24,13 @@
   "provisioners": [
     {
       "type": "file",
-      "source": "files/etc/",
-      "destination": "~/tmp/etc/"
+      "source": "files/etc/update-motd.d/99-one-click.sh",
+      "destination": "~/99-one-click.sh"
     },
     {
       "type": "shell",
       "inline": [
-        "sudo cp ~/tmp/etc/update-motd.d/99-one-click.sh /etc/update-motd.d/99-one-click.sh"
+        "sudo cp ~/99-one-click.sh /etc/update-motd.d/99-one-click.sh"
       ]
     },
     {
