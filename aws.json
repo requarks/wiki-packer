@@ -25,7 +25,13 @@
     {
       "type": "file",
       "source": "files/etc/",
-      "destination": "/etc/"
+      "destination": "~/tmp/etc/"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo cp ~/tmp/etc/update-motd.d/99-one-click.sh /etc/update-motd.d/99-one-click.sh"
+      ]
     },
     {
       "type": "file",
