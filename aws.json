@@ -16,6 +16,8 @@
       },
       "instance_type": "t2.micro",
       "ssh_username": "ubuntu",
+      "subnet_id": "subnet-1d089f37",
+      "security_groupd_id": "sg-00759f214e854239e",
       "ami_name": "marketplace-snapshot-{{timestamp}}"
     }
   ],
