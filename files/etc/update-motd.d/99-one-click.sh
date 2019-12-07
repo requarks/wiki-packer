@@ -1,11 +1,11 @@
 #!/bin/sh
 #
-# Configured as part of the DigitalOcean 1-Click Image build process
+# Configured as part of the Marketplace 1-Click Image build process
 
 myip=$(hostname -I | awk '{print$1}')
 cat <<EOF
 ********************************************************************************
-Wiki.js 2.x for DigitalOcean
+Wiki.js 2.x Marketplace Image
 
 https://wiki.js.org
 
