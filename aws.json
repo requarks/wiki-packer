@@ -14,7 +14,7 @@
         "owners": ["099720109477"],
         "most_recent": true
       },
-      "instance_type": "t2.micro",
+      "instance_type": "t3.micro",
       "ssh_username": "ubuntu",
       "subnet_id": "subnet-1d089f37",
       "security_group_id": "sg-00759f214e854239e",
@@ -35,13 +35,13 @@
     {
       "type": "shell",
       "inline": [
-        "sudo cp ~/99-one-click.sh /etc/update-motd.d/99-one-click.sh",
-        "sudo cp ~/001_onboot.sh /var/lib/cloud/scripts/per-instance/001_onboot.sh",
-        "sudo chmod +x /var/lib/cloud/scripts/per-instance/001_onboot.sh",
-        "sudo chmod +x /etc/update-motd.d/99-one-click.sh",
+        "cp ~/99-one-click.sh /etc/update-motd.d/99-one-click.sh",
+        "cp ~/001_onboot.sh /var/lib/cloud/scripts/per-instance/001_onboot.sh",
+        "chmod +x /var/lib/cloud/scripts/per-instance/001_onboot.sh",
+        "chmod +x /etc/update-motd.d/99-one-click.sh",
         "cloud-init status --wait",
-        "sudo apt -qqy update",
-        "sudo apt -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' full-upgrade"
+        "apt -qqy update",
+        "apt -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' full-upgrade"
       ],
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo bash {{ .Path }}"
     },
