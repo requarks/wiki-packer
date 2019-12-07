@@ -49,14 +49,16 @@
       "scripts": [
         "scripts/10-install_docker.sh",
         "scripts/80-firewall.sh"
-      ]
+      ],
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo bash {{ .Path }}"
     },
     {
       "type": "shell",
       "scripts": [
         "scripts/90-cleanup.sh",
         "scripts/99-img_check.sh"
-      ]
+      ],
+      "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo bash {{ .Path }}"
     }
   ]
 }
