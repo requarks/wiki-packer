@@ -15,7 +15,6 @@
         "most_recent": true
       },
       "instance_type": "t2.micro",
-      "ena_support": true,
       "ssh_username": "ubuntu",
       "ami_name": "marketplace-snapshot-{{timestamp}}"
     }
