@@ -1,2 +1,5 @@
-# wiki-do-packer
-DigitalOcean Image Builder for Wiki.js
+# wiki-packer
+Marketplace Image Builder for Wiki.js
+
+- AWS
+- DigitalOcean

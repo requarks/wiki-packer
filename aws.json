@@ -1,0 +1,63 @@
+{
+  "variables": {
+    "aws_access_key": "{{env `access_key`}}",
+    "aws_secret_key": "{{env `secret_key`}}"
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "access_key": "{{user `aws_access_key`}}",
+      "secret_key": "{{user `aws_secret_key`}}",
+      "region": "us-east-1",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "name": "ubuntu/images/*ubuntu-bionic-18.04-amd64-server-*",
+          "root-device-type": "ebs"
+        },
+        "owners": ["099720109477"],
+        "most_recent": true
+      },
+      "instance_type": "t2.micro",
+      "ena_support": true,
+      "ssh_username": "ubuntu",
+      "ami_name": "marketplace-snapshot-{{timestamp}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "files/etc/",
+      "destination": "/etc/"
+    },
+    {
+      "type": "file",
+      "source": "files/var/",
+      "destination": "/var/"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "cloud-init status --wait",
+        "chmod +x /var/lib/cloud/scripts/per-instance/001_onboot.sh",
+        "chmod +x /etc/update-motd.d/99-one-click.sh",
+        "apt -qqy update",
+        "apt -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' full-upgrade"
+      ]
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/10-install_docker.sh",
+        "scripts/80-firewall.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/90-cleanup.sh",
+        "scripts/99-img_check.sh"
+      ]
+    }
+  ]
+}
