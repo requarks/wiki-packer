@@ -8,7 +8,7 @@ chmod +x /var/lib/cloud/scripts/per-instance/001_onboot.sh
 chmod +x /etc/update-motd.d/99-one-click.sh
 
 apt -qqy update
-apt -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' full-upgrade
+DEBIAN_FRONTEND=noninteractive apt-get -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' dist-upgrade
 
 sh ./scripts/10-install_docker.sh
 sh ./scripts/80-firewall.sh
