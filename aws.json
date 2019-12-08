@@ -41,7 +41,7 @@
         "chmod +x /etc/update-motd.d/99-one-click.sh",
         "cloud-init status --wait",
         "sudo apt-get -qqy update",
-        "sudo apt-get -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' dist-upgrade"
+        "DEBIAN_FRONTEND=noninteractive sudo apt-get -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' dist-upgrade"
       ],
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo bash {{ .Path }}"
     },
