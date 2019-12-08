@@ -40,8 +40,8 @@
         "chmod +x /var/lib/cloud/scripts/per-instance/001_onboot.sh",
         "chmod +x /etc/update-motd.d/99-one-click.sh",
         "cloud-init status --wait",
-        "sudo apt-get -qqy update",
-        "DEBIAN_FRONTEND=noninteractive sudo apt-get -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' dist-upgrade"
+        "sudo apt -qqy update",
+        "sudo DEBIAN_FRONTEND=noninteractive apt-get -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' dist-upgrade"
       ],
       "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo bash {{ .Path }}"
     },
